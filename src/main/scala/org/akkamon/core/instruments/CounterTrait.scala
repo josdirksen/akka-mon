@@ -1,12 +1,16 @@
 package org.akkamon.core.instruments
 
+import akka.contrib.pattern.ReceivePipeline
 import org.akkamon.core.ActorStack
 
 trait CounterTrait extends ActorStack {
 
-   override def receive : Receive = {
-     case x =>
-       exporter.processCounter(s"count.invocation-${self.path.name}")
-       super.receive(x)
-   }
+  this: ReceivePipeline ⇒
+
+  pipelineOuter(
+    inner => {
+      case x =>
+        exporter.processCounter(s"count.invocation-${self.path.name}")
+        inner(x)
+    })
  }
