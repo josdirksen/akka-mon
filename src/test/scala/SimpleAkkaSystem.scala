@@ -16,11 +16,14 @@ object Main extends App {
   helloActor ! "buenos dias"
   helloActor ! "buenos dias"
 
-  Thread.sleep(3000);
+  while (true) {
+    Thread.sleep(1000);
 
-  helloActor ! "hello"
-  helloActor ! "hello"
-  helloActor ! "buenos dias"
+    helloActor ! "hello"
+    helloActor ! "hello"
+    helloActor ! "buenos dias"
+  }
+
 }
 
 class HelloActor extends Actor with LoggingTrait with TimingTrait with CounterTrait {
