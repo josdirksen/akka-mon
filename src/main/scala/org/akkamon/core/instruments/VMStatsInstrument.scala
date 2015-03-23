@@ -1,7 +1,7 @@
 package org.akkamon.core.instruments
 
 import java.io.File
-import akka.actor.{ActorRef, Actor}
+import akka.actor.ActorRef
 import org.akkamon.core.ActorStack
 import scala.concurrent.duration._
 

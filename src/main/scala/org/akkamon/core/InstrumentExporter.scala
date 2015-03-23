@@ -1,9 +1,6 @@
 package org.akkamon.core
 
-import java.net.InetSocketAddress
-
-import akka.actor.{Props, ActorRef, Actor, ActorSystem}
-import org.akkamon.core.exporters.StatsdExporter._
+import akka.actor.{Props, ActorRef, ActorSystem}
 import org.akkamon.core.instruments.VMStatsInstrument
 
 trait InstrumentExporter {

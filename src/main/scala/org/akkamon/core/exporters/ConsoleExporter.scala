@@ -1,9 +1,7 @@
 package org.akkamon.core.exporters
 
-import akka.actor.{Props, Actor, ActorSystem}
+import akka.actor.{Props, Actor}
 import org.akkamon.core.InstrumentExporter
-import org.akkamon.core.instruments.{TimingTrait, LoggingTrait}
-
 
 object ConsoleExporter extends InstrumentExporter {
 
