@@ -12,6 +12,6 @@ trait TimingTrait extends ActorStack {
       case x =>
         val start = System.nanoTime();
         inner(x)
-        exporter.processTimer(s"time.execution-${self.path.name}", System.nanoTime() - start);
+        exporter.processTimer(s"time.execution-${actorName}", System.nanoTime() - start);
     })
 }

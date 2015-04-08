@@ -9,6 +9,7 @@ trait InstrumentExporter {
   case class MessageEvent(message: String);
   case class TimerEvent(timer: String, value: Float);
   case class CounterEvent(key: String, value: Long);
+  case class SampledEvent(key: String, value: Long);
   case class CounterEventMap(counts: Map[String, Long]);
 
   // actor system to use for the stats collecting and sending it to the exporter
@@ -30,6 +31,7 @@ trait InstrumentExporter {
   def processCounter(key: String) = {
     counters.update(key, counters(key) + 1)
     instrumentActor ! CounterEvent(key, counters(key))
+    instrumentActor ! SampledEvent(s"sampled-$key", 1)
   }
   def processCounterMap(counts: Map[String, Long]) = instrumentActor ! CounterEventMap(counts)
 }

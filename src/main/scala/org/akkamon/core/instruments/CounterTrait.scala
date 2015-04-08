@@ -10,7 +10,7 @@ trait CounterTrait extends ActorStack {
   pipelineOuter(
     inner => {
       case x =>
-        exporter.processCounter(s"count.invocation-${self.path.name}")
+        exporter.processCounter(s"count.invocation-${actorName}")
         inner(x)
     })
  }

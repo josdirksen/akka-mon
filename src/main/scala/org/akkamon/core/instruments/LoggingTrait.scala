@@ -10,8 +10,8 @@ trait LoggingTrait extends ActorStack {
   pipelineOuter(
     inner => {
       case x =>
-        exporter.processMessage(s"Message received in ${self.path}")
+        exporter.processMessage(s"Message received in ${actorName}")
         receive(x)
-        exporter.processMessage(s"Message processed in ${self.path}")
+        exporter.processMessage(s"Message processed in ${actorName}")
     })
 }

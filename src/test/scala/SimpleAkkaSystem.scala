@@ -30,7 +30,7 @@ object Main extends App {
 
 }
 
-class HelloActor extends Actor with LoggingTrait with TimingTrait with CounterTrait with EnvelopingTrait {
+class HelloActor extends Actor with LoggingTrait with TimingTrait with CounterTrait {
 
   def receive: Receive = {
     case "hello" => println("hello back at you")
