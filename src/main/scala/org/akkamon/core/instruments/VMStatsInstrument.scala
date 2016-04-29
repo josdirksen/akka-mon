@@ -1,28 +1,13 @@
 package org.akkamon.core.instruments
 
 import java.io.File
+
 import akka.actor.ActorRef
 import org.akkamon.core.ActorStack
+
 import scala.concurrent.duration._
 
 object VMStatsInstrument {
-
-  class VMStatsActor(interval: Long, exporterActor: ActorRef) extends ActorStack {
-    import context._
-
-    override def preStart() =
-      system.scheduler.scheduleOnce(2 * interval millis, self, "tick")
-
-    // override postRestart so we don't call preStart and schedule a new message
-    override def postRestart(reason: Throwable) = {}
-
-    def receive = {
-      case "tick" =>
-        // send another periodic tick after the specified delay
-        system.scheduler.scheduleOnce(interval millis, self, "tick")
-        exporter.processCounterMap(getStats())
-    }
-  }
 
   def getStats(): Map[String, Long] = {
 
@@ -39,5 +24,23 @@ object VMStatsInstrument {
     val usuableSpaceMap = roots.map(root => s"count.fs.usuable.${root.getAbsolutePath}" -> root.getUsableSpace) toMap
 
     baseStats ++ totalSpaceMap ++ freeSpaceMap ++ usuableSpaceMap
+  }
+
+  class VMStatsActor(interval: Long, exporterActor: ActorRef) extends ActorStack {
+
+    import context._
+
+    override def preStart() =
+      system.scheduler.scheduleOnce(2 * interval millis, self, "tick")
+
+    // override postRestart so we don't call preStart and schedule a new message
+    override def postRestart(reason: Throwable) = {}
+
+    def receive = {
+      case "tick" =>
+        // send another periodic tick after the specified delay
+        system.scheduler.scheduleOnce(interval millis, self, "tick")
+        exporter.processCounterMap(getStats())
+    }
   }
 }

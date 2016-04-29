@@ -5,7 +5,7 @@ import org.akkamon.core.tracing.Envelope
 
 object TraceExtension
   extends ExtensionId[TraceExtensionImpl]
-  with ExtensionIdProvider {
+    with ExtensionIdProvider {
 
   override def lookup = TraceExtension
 

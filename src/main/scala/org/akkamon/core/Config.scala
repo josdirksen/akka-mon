@@ -2,7 +2,7 @@ package org.akkamon.core
 
 object Config {
 
-//  val InstrumentExporter: String  = "org.akkamon.core.exporters.ConsoleExporter"
+  //  val InstrumentExporter: String  = "org.akkamon.core.exporters.ConsoleExporter"
   val InstrumentExporter = "org.akkamon.core.exporters.StatsdExporter"
 
   val StatsdHost = "localhost"

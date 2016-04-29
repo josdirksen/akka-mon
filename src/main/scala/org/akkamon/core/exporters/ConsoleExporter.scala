@@ -1,6 +1,6 @@
 package org.akkamon.core.exporters
 
-import akka.actor.{Props, Actor}
+import akka.actor.{Actor, Props}
 import org.akkamon.core.InstrumentExporter
 
 object ConsoleExporter extends InstrumentExporter {
@@ -15,5 +15,6 @@ object ConsoleExporter extends InstrumentExporter {
       case counter: CounterEvent => println(s"Counter ${counter.key} at value ${counter.value}")
     }
   }
+
 }
 
